@@ -6,12 +6,22 @@ const requestSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  pickup: {
+  pickupCity: {
     type: String,
     required: true,
     trim: true,
   },
-  drop: {
+  dropCity: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  pickupLocation: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  dropLocation: {
     type: String,
     required: true,
     trim: true,

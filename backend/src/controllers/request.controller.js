@@ -3,12 +3,29 @@ const Request = require("../models/request.model");
 
 const createRequest = async (req, res) => {
   try {
-    const { userId, pickup, drop, weight, date } = req.body;
+    const {
+      userId,
+      pickupCity,
+      dropCity,
+      pickupLocation,
+      dropLocation,
+      weight,
+      date,
+    } = req.body;
 
-    if (!userId || !pickup || !drop || weight === undefined || !date) {
+    if (
+      !userId ||
+      !pickupCity ||
+      !dropCity ||
+      !pickupLocation ||
+      !dropLocation ||
+      weight === undefined ||
+      !date
+    ) {
       return res.status(400).json({
         success: false,
-        message: "userId, pickup, drop, weight, and date are required.",
+        message:
+          "userId, pickupCity, dropCity, pickupLocation, dropLocation, weight, and date are required.",
       });
     }
 
@@ -21,8 +38,10 @@ const createRequest = async (req, res) => {
 
     const newRequest = await Request.create({
       userId,
-      pickup,
-      drop,
+      pickupCity,
+      dropCity,
+      pickupLocation,
+      dropLocation,
       weight,
       date,
     });
