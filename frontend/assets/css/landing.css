@@ -1,0 +1,711 @@
+:root {
+  --bg: #0b0f1a;
+  --bg-soft: #111a2f;
+  --text: #f4f8ff;
+  --muted: #a9b6d4;
+  --orange: #ff8a1f;
+  --neon: #31b6ff;
+  --purple: #7160ff;
+  --glass: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.bg-video-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+}
+
+.bg-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(1.15) contrast(1.06);
+}
+
+.bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 8, 16, 0.76);
+}
+
+.bg-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 80% 2%, rgba(255, 138, 31, 0.22), transparent 44%),
+    radial-gradient(circle at 10% 25%, rgba(49, 182, 255, 0.18), transparent 46%),
+    radial-gradient(circle at 60% 90%, rgba(113, 96, 255, 0.2), transparent 48%);
+}
+
+.route-lines {
+  position: absolute;
+  inset: 0;
+  opacity: 0.7;
+  background-image:
+    linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(49, 182, 255, 0.16) 45%,
+      transparent 55%
+    ),
+    linear-gradient(60deg, transparent 0%, rgba(255, 138, 31, 0.16) 50%, transparent 58%);
+  animation: routeDrift 12s linear infinite;
+}
+
+.network-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 70px 70px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent 80%);
+}
+
+#particle-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(49, 182, 255, 0.7);
+  box-shadow: 0 0 20px rgba(49, 182, 255, 0.85);
+  animation: floatUp linear infinite;
+}
+
+.top-nav {
+  width: min(1150px, calc(100% - 2rem));
+  margin: 1.2rem auto 0;
+  padding: 0.75rem 1rem;
+  position: sticky;
+  top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 20;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+}
+
+.brand-mark {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: linear-gradient(120deg, var(--orange), var(--neon));
+  box-shadow: 0 0 14px rgba(255, 138, 31, 0.8);
+}
+
+.top-nav nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.top-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.top-nav a:hover {
+  color: #fff;
+  text-shadow: 0 0 12px rgba(49, 182, 255, 0.8);
+}
+
+.section {
+  width: min(1150px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 4.8rem 0;
+}
+
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+.hero-content {
+  max-width: 700px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--neon);
+  font-weight: 600;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 4.5vw, 4.2rem);
+  line-height: 1.1;
+  margin: 0.9rem 0;
+}
+
+h2 {
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  margin: 0 0 1.5rem;
+}
+
+.hero-sub {
+  color: var(--muted);
+  max-width: 60ch;
+  line-height: 1.7;
+}
+
+.cta-wrap {
+  margin-top: 1.8rem;
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.glass-input {
+  min-width: 190px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  outline: none;
+}
+
+.cta-btn {
+  position: relative;
+  overflow: hidden;
+  border: 0;
+  border-radius: 12px;
+  padding: 0.92rem 1.45rem;
+  color: #fff;
+  background: linear-gradient(120deg, var(--orange), #ff5a3a);
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+  box-shadow: 0 10px 26px rgba(255, 138, 31, 0.3);
+}
+
+.cta-btn span {
+  position: relative;
+  z-index: 2;
+}
+
+.cta-btn::after {
+  content: "";
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  left: var(--x, 50%);
+  top: var(--y, 50%);
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 70%);
+  transition: transform 0.4s var(--ease-out);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.cta-btn:hover,
+.cta-btn:focus-visible {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 16px 36px rgba(255, 138, 31, 0.45);
+}
+
+.cta-btn:hover::after,
+.cta-btn:focus-visible::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.liquid-btn::before {
+  content: "";
+  position: absolute;
+  width: 210%;
+  height: 210%;
+  left: -55%;
+  top: -210%;
+  border-radius: 40%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.34) 10%, transparent 60%);
+  transition: transform 0.65s var(--ease-out);
+  transform: translateY(68%);
+  z-index: 1;
+}
+
+.liquid-btn:hover::before,
+.liquid-btn:focus-visible::before {
+  transform: translateY(25%) rotate(16deg);
+}
+
+.panel {
+  position: relative;
+}
+
+.hero-visual {
+  position: relative;
+  min-height: 420px;
+  border-radius: 24px;
+  padding: 1rem;
+}
+
+.status-chip {
+  position: absolute;
+  padding: 0.42rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  backdrop-filter: blur(8px);
+}
+
+.status-orange {
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 138, 31, 0.2);
+  border: 1px solid rgba(255, 138, 31, 0.5);
+}
+
+.status-blue {
+  bottom: 1rem;
+  left: 1rem;
+  background: rgba(49, 182, 255, 0.2);
+  border: 1px solid rgba(49, 182, 255, 0.5);
+}
+
+.route-map {
+  position: relative;
+  height: 100%;
+  border-radius: 20px;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 34px 34px;
+  overflow: hidden;
+}
+
+.route-map-line {
+  position: absolute;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgba(49, 182, 255, 0.82), transparent);
+  box-shadow: 0 0 12px rgba(49, 182, 255, 0.9);
+  animation: pulsePath 3.5s ease infinite;
+}
+
+.line-a {
+  width: 72%;
+  top: 32%;
+  left: 12%;
+  transform: rotate(12deg);
+}
+
+.line-b {
+  width: 58%;
+  top: 57%;
+  left: 28%;
+  transform: rotate(-16deg);
+  animation-delay: -1.2s;
+}
+
+.line-c {
+  width: 65%;
+  top: 64%;
+  left: 4%;
+  transform: rotate(22deg);
+  animation-delay: -0.4s;
+}
+
+.node {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow:
+    0 0 0 6px rgba(49, 182, 255, 0.2),
+    0 0 20px rgba(49, 182, 255, 0.9);
+  animation: nodePulse 2.8s ease infinite;
+}
+
+.node-a {
+  top: 21%;
+  left: 16%;
+}
+
+.node-b {
+  top: 41%;
+  left: 69%;
+  animation-delay: -1s;
+}
+
+.node-c {
+  top: 73%;
+  left: 24%;
+  animation-delay: -0.5s;
+}
+
+.node-d {
+  top: 64%;
+  right: 16%;
+  animation-delay: -1.3s;
+}
+
+.flow-grid,
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.flow-grid {
+  align-items: center;
+}
+
+.flow-card,
+.feature-card {
+  padding: 1.25rem;
+}
+
+.flow-arrow {
+  height: 2px;
+  position: relative;
+  background: linear-gradient(90deg, rgba(49, 182, 255, 0.2), rgba(255, 138, 31, 0.4));
+}
+
+.flow-pulse {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(49, 182, 255, 1) 20%, rgba(49, 182, 255, 0.2) 70%);
+  box-shadow: 0 0 12px rgba(49, 182, 255, 1);
+  animation: flowPulse 3.2s linear infinite;
+}
+
+.step {
+  display: inline-flex;
+  margin-bottom: 0.75rem;
+  color: var(--orange);
+  font-weight: 700;
+}
+
+.glow-card {
+  transition: transform 0.34s var(--ease-out), border-color 0.34s var(--ease-out), box-shadow 0.34s var(--ease-out);
+}
+
+.glow-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: rgba(49, 182, 255, 0.48);
+  box-shadow:
+    0 18px 45px rgba(8, 14, 30, 0.45),
+    0 0 22px rgba(49, 182, 255, 0.35);
+}
+
+.network-panel {
+  position: relative;
+  min-height: 360px;
+  border-radius: 20px;
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.network-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.route-path {
+  fill: none;
+  stroke-width: 2;
+  stroke: rgba(49, 182, 255, 0.56);
+  stroke-linecap: round;
+  stroke-dasharray: 6 14;
+  animation: dashMove 10s linear infinite;
+}
+
+.route-path:nth-child(2) {
+  stroke: rgba(255, 138, 31, 0.52);
+  animation-duration: 8s;
+}
+
+.route-path:nth-child(3) {
+  stroke: rgba(113, 96, 255, 0.54);
+  animation-duration: 12s;
+}
+
+.network-dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 0 18px rgba(49, 182, 255, 0.88);
+}
+
+.dot-1 {
+  animation: travelA 8s linear infinite;
+}
+
+.dot-2 {
+  animation: travelB 10.5s linear infinite;
+}
+
+.dot-3 {
+  animation: travelC 7.5s linear infinite;
+}
+
+.truck-badge {
+  position: absolute;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(11, 15, 26, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 14px rgba(49, 182, 255, 0.35);
+}
+
+.truck-badge-1 {
+  top: 16%;
+  left: 18%;
+  animation: bob 3.4s ease-in-out infinite;
+}
+
+.truck-badge-2 {
+  top: 52%;
+  right: 17%;
+  animation: bob 3s ease-in-out infinite;
+  animation-delay: -0.8s;
+}
+
+.truck-badge-3 {
+  bottom: 14%;
+  left: 43%;
+  animation: bob 3.2s ease-in-out infinite;
+  animation-delay: -1.4s;
+}
+
+.cta-final {
+  padding-bottom: 5rem;
+}
+
+.cta-card {
+  padding: 2rem;
+  text-align: center;
+}
+
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.22);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px) scale(0.99);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.2;
+  }
+  20% {
+    opacity: 1;
+  }
+  to {
+    transform: translate3d(0, -120vh, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes routeDrift {
+  from {
+    transform: translateX(-3%);
+  }
+  to {
+    transform: translateX(3%);
+  }
+}
+
+@keyframes pulsePath {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes nodePulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes flowPulse {
+  from {
+    left: -2%;
+  }
+  to {
+    left: 94%;
+  }
+}
+
+@keyframes dashMove {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -160;
+  }
+}
+
+@keyframes travelA {
+  0% {
+    left: 6%;
+    top: 72%;
+  }
+  50% {
+    left: 54%;
+    top: 38%;
+  }
+  100% {
+    left: 92%;
+    top: 18%;
+  }
+}
+
+@keyframes travelB {
+  0% {
+    left: 14%;
+    top: 20%;
+  }
+  50% {
+    left: 46%;
+    top: 63%;
+  }
+  100% {
+    left: 88%;
+    top: 42%;
+  }
+}
+
+@keyframes travelC {
+  0% {
+    left: 3%;
+    top: 88%;
+  }
+  50% {
+    left: 50%;
+    top: 30%;
+  }
+  100% {
+    left: 96%;
+    top: 74%;
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@media (max-width: 920px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .flow-grid,
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .flow-arrow {
+    width: 2px;
+    height: 34px;
+    margin: 0 auto;
+  }
+
+  .flow-pulse {
+    animation: flowPulseVertical 3.2s linear infinite;
+  }
+
+  .hero-visual {
+    min-height: 340px;
+  }
+}
+
+@keyframes flowPulseVertical {
+  from {
+    top: -2%;
+    left: 50%;
+  }
+  to {
+    top: 88%;
+    left: 50%;
+  }
+}
