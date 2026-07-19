@@ -39,7 +39,7 @@
 
 ### Environment Variables (Production)
 ```
-MONGO_URI = mongodb+srv://shivaganyarpwar_db_user:Zxcvbnm282006@cluster0.bidp5sa.mongodb.net/?appName=Cluster0
+MONGO_URI =
 PORT = 5000
 NODE_ENV = production
 ```
